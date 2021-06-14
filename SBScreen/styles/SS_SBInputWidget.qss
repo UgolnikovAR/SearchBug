@@ -1,0 +1,14 @@
+QLineEdit {
+	background-color: rgba(240, 240, 255, 4%);
+	border-color: white;
+
+	color: white;
+	src: url("../fonts/QanelasRegular.ttf");
+	font: normal 25px "QanelasRegular";
+}
+
+QLineEdit:hover {
+	border: 3px solid;
+	background-color: rgba(210, 20, 40, 80%);
+	border-color: rgba(230, 5, 5, 90%);
+}

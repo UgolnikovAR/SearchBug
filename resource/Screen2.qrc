@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="cat">Cat.png</file>
+    </qresource>
+</RCC>

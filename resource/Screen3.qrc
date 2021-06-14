@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="img">back_tag_lastname.png</file>
+        <file alias="background_tag_lastname">Background_tag_lastname.png</file>
+        <file alias="smallLogo">smallLogo.png</file>
+    </qresource>
+</RCC>

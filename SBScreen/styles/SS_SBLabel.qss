@@ -1,0 +1,12 @@
+QLabel {
+	color: white;
+	font: normal 25px "QanelasRegular";
+}
+
+QWidget {
+	/*background-color: rgba(210, 20, 40, 25%);*/
+}
+
+QWidget:hover {
+	/*background-color: rgba(210, 20, 40, 50%);*/
+}

@@ -1,0 +1,19 @@
+QLabel {
+	color: white;
+	font: normal 20px "QanelasRegular";
+	text-align: justify;
+	margin-bottom: 0px;
+}
+
+QWidget {
+	/*background-color: rgba(210, 20, 40, 25%);*/
+}
+
+QWidget:hover {
+	/*background-color: rgba(210, 20, 40, 50%);*/
+	/*background-color: rgba(210, 20, 40, 2%);*/
+}
+
+SBInputGroupWidget {
+	background-color: rgba(210, 20, 40, 25%);
+}

@@ -1,0 +1,3 @@
+QAbstractScrollArea{
+    flags: Qt.FramelessWindowHint
+}
