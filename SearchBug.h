@@ -3,7 +3,6 @@
 #include "SBXMLStreamReader.h"
 #include "SBScreen\SBPallete.h"
 #include "SBFilter.h"
-#include "SBWindow.h"
 #include <QtWidgets>
 
 
@@ -35,7 +34,6 @@ private: //data
 
     SBXMLStreamReader* pXML_Module = nullptr;
     SBTable* table;
-    SBWindow* window;
     QScrollArea* master;
 
 

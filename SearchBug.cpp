@@ -6,20 +6,6 @@
 
 SearchBug::SearchBug()
 {
-
-        /*Хуй знает, пока не работает. Код оставлю на будущее.*/
-/*    window = new SBWindow;
-    window->show();
-
-    //master->setStyleSheet(windowQSS()); //didnt work
-
-    window->setWindowFlags(Qt::FramelessWindowHint
-                         | Qt::WindowTitleHint
-                         | Qt::WindowMinimizeButtonHint);
-
-    master = new QScrollArea(window);
-*/
-
 //init all screen widgets
 //init master
     master = new QScrollArea(this);
