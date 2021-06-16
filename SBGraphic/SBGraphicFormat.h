@@ -6,8 +6,6 @@
  * which are realized in the programm.
  *
  * Here are could be included new identifiers.
- *
- * All identifiers is need to be writen in format.dat.
 */
 enum ContentType
 {
@@ -18,17 +16,53 @@ enum ContentType
     amount_of_money
 };
 
+/* StaticImages_id is a group of tag identifiers,
+ * which are created by the programm.
+ *
+ * Here are could be included new identifiers.
+ *
+ * name style is (snake low case ContentType)_(camel upper case image class)
+*/
+enum StaticImages_id
+{
+    random_Tag,
+    random_Content,
+    random_Pictogramm,
+
+    name_StandartTag,
+    name_StandartContent,
+
+    bank_filial_id_Tag,
+    bank_filial_id_Content,
+    bank_filial_id_Pictogramm,
+
+    personal_account_Tag,
+    personal_account_Content,
+    personal_account_Pictogramm,
+
+    amount_of_money_Tag,
+    amount_of_money_Content,
+    amount_of_money_Pictogramm,
+
+//max value, that using in cicles
+    maximum
+};
+
 
 class SBGraphicFormat: public QObject
 {
     Q_OBJECT
 
 private:
+    static QVector<QImage> img;
+    static const QString space;
     static const QVector<QString> stringFormat;
-    static const QImage background_tag_lastname;
-    //static const QImage pictogramm;
+
+private:
     ContentType type;
 
+    QImage _tagImg;
+    QImage _contentImg;
 
 public:
     SBGraphicFormat(){} // for testing. It needs to delete far.
@@ -37,6 +71,9 @@ public:
     SBGraphicFormat(const SBGraphicFormat&);
     SBGraphicFormat& operator=(const SBGraphicFormat&);
     virtual ~SBGraphicFormat(){}
+
+    void initImages(QString&, QString&);
+    static QImage drawStaticImage(SBGraphicImageFormat&);
 
 /* definiteType
  * Method, that is defining format code for tag.*/
@@ -55,8 +92,16 @@ public:
     QPoint posContentBackground();
     int height();
 
+    void formatString(QString&);
+
 
 private://sub-procedures
     void loadPictogramm(ContentType t);
+    void init_imgTag(QString&);
+    void init_imgContent(QString&);
+
+private://flags
+    bool formatted = false;
+
 };
 

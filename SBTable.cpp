@@ -59,6 +59,11 @@ void SBSubTable::draw(QPoint& offset, QWidget* context, QPainter& p)
     qDebug() << "Table Empty\n";
 }
 
+void SBSubTable::initImages()
+{
+    for(auto& x: table) x.initImages();
+}
+
 
 int SBSubTable::calculateHeight(int shift)
 {
@@ -70,6 +75,13 @@ int SBSubTable::calculateHeight(int shift)
 
     return height;
 }
+
+
+void SBSubTable::formatTable()
+{
+    for(auto& x: table) x.formatElement();
+}
+
 
 
 void SBTable::draw(QPoint& offset, QWidget* context, QPainter& p)
@@ -111,6 +123,12 @@ void SBTable::draw(QPoint& offset, QWidget* context, QPainter& p)
 }
 
 
+void SBTable::initImages()
+{
+    for(auto& x: table) x.initImages();
+}
+
+
 int SBTable::calculateHeight(int shift)
 {
     int height = 0;
@@ -121,4 +139,10 @@ int SBTable::calculateHeight(int shift)
     height += shift; //bottom margin
 
     return height;
+}
+
+
+void SBTable::formatTable()
+{
+    for(auto& x: table) x.formatTable();
 }

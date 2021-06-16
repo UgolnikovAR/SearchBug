@@ -2,14 +2,11 @@
 #include "SBScreen/SBPallete.h"
 
 SBGraphicElement::SBGraphicElement()
-{
-    //qDebug() << "->SBGraphicElement() here";
-}
+{}
 
 
 SBGraphicElement::SBGraphicElement(const SBGraphicElement& el)
-    : //resultImg(el.resultImg),
-      format(el.tag),
+    : format(el.tag),
       tag(el.tag),
       content(el.content)
 {}
@@ -19,9 +16,7 @@ SBGraphicElement::SBGraphicElement(QString& tag, QString& content)
     : format(content),
       tag(tag),
       content(content)
-{
-    //qDebug() << "->SBGraphicElement (full construct) here";
-}
+{}
 
 
 SBGraphicElement& SBGraphicElement::operator=(const SBGraphicElement& el)
@@ -43,6 +38,18 @@ void SBGraphicElement::draw(QPoint& offset, QWidget* context, QPainter& p)
 
   //смещение указателя offset
     offset.setY(offset.y() + format.getSize().height());
+}
+
+void SBGraphicElement::initImages()
+{
+    format.initImages(tag, content);
+}
+
+
+void SBGraphicElement::formatElement()
+{
+    tag += ':';
+    format.formatString(content);
 }
 
 
@@ -72,6 +79,9 @@ void SBGraphicElement::drawContent(QPoint offset,
                                    QWidget* context,
                                    QPainter& p)
 {
+//format ContentType::personal account has specificly draw-procedure
+
+
 //shift cursor offset
     offset = offset + format.posContentBackground();
 

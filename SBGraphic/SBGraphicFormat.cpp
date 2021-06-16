@@ -1,5 +1,7 @@
 #include "SBGraphicFormat.h"
 
+#include <QFontMetrics>
+
 const QVector<QString> SBGraphicFormat::stringFormat
 {
     "Фамилия",
@@ -11,7 +13,9 @@ const QVector<QString> SBGraphicFormat::stringFormat
 };
 
 //Initialization images
-const QImage SBGraphicFormat::background_tag_lastname(":/images/background_tag_lastname");
+
+//const QImage SBGraphicFormat::background_tag_lastname(":/images/background_tag_lastname");
+const QString SBGraphicFormat::space{"  "};
 
 SBGraphicFormat::SBGraphicFormat(ContentType type)
     : type(type)
@@ -38,6 +42,70 @@ SBGraphicFormat& SBGraphicFormat::operator=(const SBGraphicFormat& f)
     type = f.type;
     return *this;
 }
+
+
+void SBGraphicFormat::initImages(QString& tag, QString& cont)
+{
+    init_imgTag(tag);
+    init_imgContent(cont);
+}
+
+void SBGraphicFormat::init_imgTag(QString& tag)
+{
+    QFontMetrics fm(SBFont_text);
+
+    QSize imgSize(fm.width(tag), format_random_Tag.size().height());
+    imgSize += QSize(15, 0); //image offset
+    _tagImg = QImage(imgSize, QImage::Format::Format_ARGB32);
+
+    QPainter p;
+    p.begin(&_tagImg);
+    p.setBrush(format_random_Tag.brush());
+    p.setPen(format_random_Tag.pen());
+    p.drawRoundedRect(QRect(QPoint(0,0),imgSize),
+                      format_random_Tag.radius(),
+                      format_random_Tag.radius());
+    p.end();
+}
+
+void SBGraphicFormat::init_imgContent(QString& cont)
+{
+    QFontMetrics fm(SBFont_text);
+
+    QSize imgSize(fm.width(cont), format_random_Tag.size().height());
+    imgSize += QSize(15, 0); //image offset
+    _contentImg = QImage(imgSize, QImage::Format::Format_ARGB32);
+
+    QPainter p;
+    p.begin(&_contentImg);
+    p.setBrush(format_random_Tag.brush());
+    p.setPen(SBT_pen_table_background);
+    p.drawRoundedRect(QRect(QPoint(0,0),imgSize),
+                      format_random_Tag.radius(),
+                      format_random_Tag.radius());
+    p.end();
+}
+
+QImage SBGraphicFormat::drawStaticImage(SBGraphicImageFormat& f)
+{
+    if(f.skip()) return QImage();
+
+    QPainter p;
+
+    QImage img(f.size(), QImage::Format_ARGB32);
+
+    p.begin(&img);
+    p.setBrush(f.brush());
+    p.setPen(f.pen());
+    p.drawRoundedRect(f.rect(),
+                      f.radius(),
+                      f.radius());
+    p.end();
+
+    return img;
+}
+
+
 
 
 /* definiteType
@@ -79,6 +147,7 @@ ContentType SBGraphicFormat::definiteType(const QString& t)
 
 const QImage& SBGraphicFormat::tagImg()
 {
+/* olds
     if(type == name)             return background_tag_lastname;
     if(type == bank_filial_id)   return background_tag_lastname;
     if(type == personal_account) return background_tag_lastname;
@@ -86,12 +155,14 @@ const QImage& SBGraphicFormat::tagImg()
 
 //else return empty image
     static const QImage img;
-    return img;
+*/
+    return _tagImg;
 }
 
 
 const QImage& SBGraphicFormat::contentImg()
 {
+/*olds
     if(type == name)             return background_tag_lastname;
     if(type == bank_filial_id)   return background_tag_lastname;
     if(type == personal_account) return background_tag_lastname;
@@ -99,7 +170,8 @@ const QImage& SBGraphicFormat::contentImg()
 
 //else return empty image
     static const QImage img;
-    return img;
+*/
+    return _contentImg;
 }
 
 
@@ -150,6 +222,19 @@ int SBGraphicFormat::height()
     if(type == amount_of_money)  return 20;
 
     return 0;
+}
+
+
+void SBGraphicFormat::formatString(QString& str)
+{
+    if(!formatted) {
+    //format "personal_account" has specific view
+        if(type == personal_account) {
+            for(int i = 4; i < str.length(); i += 4 + space.length())
+                str.insert(i, space);
+        }
+        formatted = true;
+    }
 }
 
 

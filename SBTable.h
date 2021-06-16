@@ -26,10 +26,12 @@ public:
     void add(SBGraphicElement el) {table.push_back(el);}
 
     void draw(QPoint& offset, QWidget* context, QPainter& p);
+    void initImages();
 
     int  height()           {return height_;}
     void setHeight(int a)   {height_ = a;}
     int  calculateHeight(int shift);
+    void formatTable();
 
     SubTable::iterator begin() {return SubTable::iterator (table.begin());}
     SubTable::iterator end()   {return SubTable::iterator (table.end());  }
@@ -54,10 +56,12 @@ public:
     void add(SBSubTable t) {table.push_back(t);}
 
     void draw(QPoint& offset, QWidget* context, QPainter& p);
+    void initImages();
     int calculateHeight(int shift);
     virtual ~SBTable(){}
 
     void setDrawed(bool s) {drawed = s;}
+    void formatTable();
 
 private:
     bool drawed = false;

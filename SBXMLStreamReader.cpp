@@ -52,6 +52,9 @@ SBXMLStreamReader::SBXMLStreamReader(QString path,
     else qDebug() << "File was not opened\n";
     file.close();
 
+    table->formatTable();
+    table->initImages();
+
     this->resize(2000, 3000);
 }
 

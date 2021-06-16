@@ -26,6 +26,8 @@ public:
     virtual ~SBGraphicElement() {}
 
     void draw(QPoint& offset, QWidget* context, QPainter& p);
+    void initImages();
+    void formatElement();
 
     void setTag(QString t)      {tag = t;}
     void setContent(QString c)  {content = c;}
