@@ -19,8 +19,8 @@ private:
     QWidget* master;
     QWidget* groupInputWidget;
 
-    int giw_width = 1000;
-    int giw_height = 800;
+    int giw_width = 680;
+    int giw_height = 220;
 
     QString defaultPath;
     QString defaultTableName {"Сотрудник"};
@@ -37,6 +37,8 @@ private: //Qt GUI widgets
     QLabel* l_table_name;
     QLabel* l_field_name;
     QLabel* l_value;
+
+    QPushButton* pcmdFind;
 
     QPoint giw_offset(); //unused, olds
 
@@ -59,11 +61,13 @@ private: //sub-procedures
     QPoint center_align();
     void draw_contain(QPoint&, QPainter&);
     void giw_init();
+    QSize giw_size();
 
     void initXmlModule();
 
 private: //images
-    QImage cat;
+    QImage smallLogo;
+    QImage giw_background;
 
 public slots:
     void slotSetGiw();

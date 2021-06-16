@@ -8,12 +8,13 @@ SBInputScreen::SBInputScreen(QString p, QWidget* m, SearchBug* parent)
       parent(parent),
       master(m),
       defaultPath(p),
-      cat(":/images/cat")
+      smallLogo(":/images/smallLogo"),
+      giw_background(":/images/giw_background")
 {
     this->resize(2000, 3000);
     groupInputWidget = new QWidget(this);
     groupInputWidget->resize(giw_width, giw_height);
-    groupInputWidget->move(giw_offset());
+    groupInputWidget->move(center_align());
 
     giw_init();
     groupInputWidget->show();
@@ -43,7 +44,7 @@ QPoint SBInputScreen::center_align()
     QRect r(master->rect());
     QPoint p;
     p.setX(r.width()/2);
-    p.setY(r.height()/2);
+    p.setY(r.height()/8);
 
     return p;
 }
@@ -71,7 +72,7 @@ void SBInputScreen::paintEvent(QPaintEvent*)
 
 void SBInputScreen::resizeEvent(QResizeEvent* re)
 {
-    static const QPoint giw_offset(- giw_width/2, - giw_height/2);
+    static const QPoint giw_offset(- giw_size().width()/2, smallLogo.size().height()+80);
     groupInputWidget->move(center_align() + giw_offset);
 
     qDebug() << "resizeEvent with size -> " << re->size();
@@ -80,9 +81,13 @@ void SBInputScreen::resizeEvent(QResizeEvent* re)
 
 void SBInputScreen::draw_contain(QPoint& p, QPainter& painter)
 {
-    //static const QPoint cat_offset (- 541/2, - 605/2); olds
-    //painter.drawImage(p + cat_offset, cat); olds
-    p.setY(p.y() + cat.size().height());
+    static const QPoint smallLogo_offset (- smallLogo.size().width()/2, 0);
+    painter.drawImage(p + smallLogo_offset, smallLogo);
+
+    p.setY(p.y() + smallLogo.size().height());
+
+    static const QPoint giw_background_offset (- giw_background.size().width()/2, 0);
+    painter.drawImage(p + giw_background_offset, giw_background);
 }
 
 
@@ -175,10 +180,11 @@ void SBInputScreen::giw_init()
         file1.close();
 
         QPoint giw_button_pos = giw_label_pos + shift;
-        QPushButton* pcmdFind = new QPushButton("FIND", groupInputWidget);
+        pcmdFind = new QPushButton("FIND", groupInputWidget);
 
         pcmdFind ->setStyleSheet(SS_SBQPushButton);
         pcmdFind ->move(giw_button_pos);
+        pcmdFind ->move(giw_button_pos + QPoint(giw_size().width()/2 - pcmdFind->size().width()/2, 0));
         pcmdFind ->show();
 
         QObject::connect(pcmdFind, SIGNAL(clicked()), this, SLOT(slotSetGiw()));
@@ -193,6 +199,16 @@ void SBInputScreen::giw_init()
     giw_width  = giw_lineEdit_pos.x()
                 + le_path->size().width()
                 + giw_padding;
+}
+
+
+QSize SBInputScreen::giw_size()
+{
+    QSize size( le_path->pos().x()  + le_path->size().width(),  //width
+                pcmdFind->pos().y() + pcmdFind->size().height()+20 //height
+              );
+    groupInputWidget->resize(size);
+    return size;
 }
 
 
@@ -220,10 +236,9 @@ QPoint SBInputScreen::giw_offset()
 //set left-up position in centre of master screen
     QPoint position = center_align();
 
-    //static QRect giw_rect(position, QSize(giw_width, giw_height));
 
 //centralize centre of giw in master screen centre
-    static const QPoint giw_offset(- giw_width/2, - giw_height/2);
+    static const QPoint giw_offset(- giw_size().width()/2, - giw_size().height()/2);
     position += giw_offset;
 
     return position;

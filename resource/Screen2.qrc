@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file alias="cat">Cat.png</file>
+        <file alias="giw_background">background_giw.png</file>
     </qresource>
 </RCC>
