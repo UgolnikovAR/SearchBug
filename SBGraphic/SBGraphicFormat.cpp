@@ -216,10 +216,10 @@ QPoint SBGraphicFormat::posContentBackground()
 
 int SBGraphicFormat::height()
 {
-    if(type == name)             return 20;
-    if(type == bank_filial_id)   return 20;
-    if(type == personal_account) return 20;
-    if(type == amount_of_money)  return 20;
+    if(type == name)             return format_random_Tag.rect().height();
+    if(type == bank_filial_id)   return format_random_Tag.rect().height();
+    if(type == personal_account) return format_random_Tag.rect().height();
+    if(type == amount_of_money)  return format_random_Tag.rect().height();
 
     return 0;
 }

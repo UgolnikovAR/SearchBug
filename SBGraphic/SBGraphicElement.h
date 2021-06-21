@@ -25,7 +25,7 @@ public:
     SBGraphicElement& operator=(const SBGraphicElement&);
     virtual ~SBGraphicElement() {}
 
-    void draw(QPoint& offset, QWidget* context, QPainter& p);
+    void draw(QPoint& offset, QPainter& p);
     void initImages();
     void formatElement();
 
@@ -36,7 +36,7 @@ public:
     int height()                {return format.height();}
 
 private://sub-methods
-    void drawTag       (QPoint, QString tag,      SBGraphicFormat&, QWidget* context, QPainter& p);
-    void drawContent   (QPoint, QString content,  SBGraphicFormat&, QWidget* context, QPainter& p);
-    void drawPictogramm(QPoint, SBGraphicFormat&, QWidget* context, QPainter& p);
+    void drawTag       (QPoint, QString tag,      SBGraphicFormat&, QPainter& p);
+    void drawContent   (QPoint, QString content,  SBGraphicFormat&, QPainter& p);
+    void drawPictogramm(QPoint, SBGraphicFormat&, QPainter& p);
 };

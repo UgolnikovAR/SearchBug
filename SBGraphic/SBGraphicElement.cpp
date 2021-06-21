@@ -29,12 +29,12 @@ SBGraphicElement& SBGraphicElement::operator=(const SBGraphicElement& el)
 }
 
 
-void SBGraphicElement::draw(QPoint& offset, QWidget* context, QPainter& p)
+void SBGraphicElement::draw(QPoint& offset, QPainter& p)
 {
 //(Вычисление QPoint - позиция относительно базового элемента.)
-    drawTag(offset, tag, format, context, p);
-    drawContent(offset, content, format, context, p);
-    drawPictogramm(offset, format, context, p);
+    drawTag(offset, tag, format, p);
+    drawContent(offset, content, format, p);
+    drawPictogramm(offset, format, p);
 
   //смещение указателя offset
     offset.setY(offset.y() + format.getSize().height());
@@ -56,7 +56,6 @@ void SBGraphicElement::formatElement()
 void SBGraphicElement::drawTag(QPoint offset,
                                QString tag,
                                SBGraphicFormat& format,
-                               QWidget* context,
                                QPainter& p)
 {
 
@@ -76,7 +75,6 @@ void SBGraphicElement::drawTag(QPoint offset,
 void SBGraphicElement::drawContent(QPoint offset,
                                    QString content,
                                    SBGraphicFormat& format,
-                                   QWidget* context,
                                    QPainter& p)
 {
 //format ContentType::personal account has specificly draw-procedure
@@ -99,7 +97,6 @@ void SBGraphicElement::drawContent(QPoint offset,
 
 void SBGraphicElement::drawPictogramm(QPoint offset,
                                       SBGraphicFormat& format,
-                                      QWidget* context,
                                       QPainter& p)
 {
     //Вычисление QPoint - позиция относительно базового элемента.

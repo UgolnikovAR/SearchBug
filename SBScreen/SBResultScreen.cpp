@@ -9,15 +9,9 @@ SBResultScreen::SBResultScreen(QScrollArea* sb_app)
 {
     this->resize(2000, 3000);
 
-
     master->resize(1200, 800);
     master->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     master->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //sa.setMinimumWidth(1000); //then set it later
-    //sa.setMinimumHeight(800);
-
-
-
 }
 
 
@@ -36,25 +30,17 @@ void SBResultScreen::paintEvent(QPaintEvent*)
 {
     QPoint point(center_align()); //(x, y) - position for paint output image
 
-
     static QWidget* master = this; //master - widget that is general screen
 
-    QPainter painter(master);
+    static QPainter painter(master);
     painter.begin(master);
 
-    //if(static int first = true; first){
-        painter.fillRect(master->rect(), brush_master_background);
-
-        draw_contain(point, painter); //containment, that is images
-        Ttable->draw(point, master, painter);
-        //first = false;
-    //}
+    painter.fillRect(master->rect(), brush_master_background);
+    draw_contain(point, painter); //containment, that is images
+    Ttable->draw(point, master, painter);
 
     painter.end();
-
-//test
-    //static int testi=0;
-    //qDebug() << "Frame R_Scr: "<< ++testi << master->rect(); //olds DBG
+    qDebug() << "ResultScreen size ->" << this->size();
 }
 
 

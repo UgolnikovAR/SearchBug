@@ -20,6 +20,7 @@ public:
 
     void paintEvent(QPaintEvent*);
     void setTable(SBTable* t) {Ttable = t;};
+    void imageReset() {Ttable->setDrawed(false);}
 
 private:
     QPoint center_align();

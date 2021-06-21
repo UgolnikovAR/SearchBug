@@ -19,31 +19,31 @@ SearchBug::SearchBug()
 //create test panel (state buttons)
 
     testPanel = master;
-    QPushButton* b1 = new QPushButton("StartScreen",  testPanel);
+    //QPushButton* b1 = new QPushButton("StartScreen",  testPanel);
     QPushButton* b2 = new QPushButton("InputScreen",  testPanel);
-    QPushButton* b3 = new QPushButton("ResultScreen", testPanel);
+    //QPushButton* b3 = new QPushButton("ResultScreen", testPanel);
 
     QPoint b_pos(2, 2);
     QSize b_size(200, 40);
-
+/*
     b1->resize(b_size);
     b1->move(b_pos);
     b_pos.setY( b_pos.y() + b1->size().height() );
     b1->show();
-
+*/
     b2->resize(b_size);
     b2->move(b_pos);
     b_pos.setY( b_pos.y() + b2->size().height() );
     b2->show();
-
+/*
     b3->resize(b_size);
     b3->move(b_pos);
     b_pos.setY( b_pos.y() + b3->size().height() );
     b3->show();
-
-    connect(b1, SIGNAL(clicked()), SLOT(slotStartScreen()));
+*/
+    //connect(b1, SIGNAL(clicked()), SLOT(slotStartScreen()));
     connect(b2, SIGNAL(clicked()), SLOT(slotInputScreen()));
-    connect(b3, SIGNAL(clicked()), SLOT(slotResultScreen()));
+    //connect(b3, SIGNAL(clicked()), SLOT(slotResultScreen()));
 
 
     master->show();
@@ -94,6 +94,7 @@ void SearchBug::initXmlModule(QString& path, QString& tableName,
 //set table in SBResultScreen
     SBResultScreen* pscr = dynamic_cast<SBResultScreen*> (state[State_id::result_screen]);
     pscr->setTable(table);
+    pscr->imageReset();
 }
 
 

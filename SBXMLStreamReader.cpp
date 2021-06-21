@@ -34,7 +34,7 @@ SBXMLStreamReader::SBXMLStreamReader(QString path,
                     name = sr.name().toString();
                     text = sr.readElementText();
 
-                    qDebug() << "Line-> " << name << text; //old DBG
+                    //qDebug() << "Line-> " << name << text; //old DBG
                     current.setTag(name);
                     current.setContent(text);
                     subTable.add(current);

@@ -25,12 +25,12 @@ public:
     void operator=(const SBSubTable&);
     void add(SBGraphicElement el) {table.push_back(el);}
 
-    void draw(QPoint& offset, QWidget* context, QPainter& p);
+    void draw(QPoint& offset, QPainter& p);
     void initImages();
 
     int  height()           {return height_;}
     void setHeight(int a)   {height_ = a;}
-    int  calculateHeight(int shift);
+    int  calculateHeight();
     void formatTable();
 
     SubTable::iterator begin() {return SubTable::iterator (table.begin());}
@@ -57,10 +57,10 @@ public:
 
     void draw(QPoint& offset, QWidget* context, QPainter& p);
     void initImages();
-    int calculateHeight(int shift);
+    int calculateHeight();
     virtual ~SBTable(){}
 
-    void setDrawed(bool s) {drawed = s;}
+    void setDrawed(bool d) {drawed = d;}
     void formatTable();
 
 private:
